@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: rainbowkart-server
+    env: node
+    buildCommand: ''
+    startCommand: node server/index.js
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /health
+  - type: static
+    name: rainbowkart-client
+    env: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_WS_URL
+        fromService:
+          name: rainbowkart-server
+          type: web
+          property: host

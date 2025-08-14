@@ -2,7 +2,15 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 const port = process.env.PORT || 3001;
-const server = http.createServer();
+const server = http.createServer((req, res) => {
+  if (req.method === 'GET' && (req.url === '/' || req.url === '/health')) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('OK');
+  } else {
+    res.writeHead(404);
+    res.end('Not Found');
+  }
+});
 const io = new Server(server, {
   cors: { origin: '*', methods: ['GET', 'POST'] }
 });
