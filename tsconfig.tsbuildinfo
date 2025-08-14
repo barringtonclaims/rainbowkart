@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/net/socket.ts","./src/scenes/kartscene.ts","./src/three/game3d.ts","./src/three/minimap.ts","./src/ui/lobby.ts"],"version":"5.9.2"}
